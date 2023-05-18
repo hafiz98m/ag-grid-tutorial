@@ -7,6 +7,8 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
+import "ag-grid-enterprise";
+
 function App() {
   const gridRef = useRef();
   const [rowData, setRowData] = useState([
@@ -57,6 +59,7 @@ function App() {
   const defaultColDef = useMemo(() => ({
     sortable: true,
     filter: true,
+    enableRowGroup: true,
   }));
 
   const cellClickedListener = useCallback((e) => {
@@ -75,9 +78,10 @@ function App() {
 
   return (
     <div className="ag-theme-alpine" style={{ height: 500 }}>
-      <button onClick={pushMeClicked}>Push Me</button>
+      {/* <button onClick={pushMeClicked}>Push Me</button> */}
       <AgGridReact
         ref={gridRef}
+        rowGroupPanelShow="always"
         onCellClicked={cellClickedListener}
         rowData={rowData}
         columnDefs={columDefs}
